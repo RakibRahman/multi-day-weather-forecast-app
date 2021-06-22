@@ -5,19 +5,19 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start-dev":"webpack serve"
+    "start-dev": "webpack serve"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RakibRahman/multi-day-weather-forecast-app.git"
+    "url": "git+https://github.com/RakibRahman/webpack-practice.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RakibRahman/multi-day-weather-forecast-app/issues"
+    "url": "https://github.com/RakibRahman/webpack-practice/issues"
   },
-  "homepage": "https://github.com/RakibRahman/multi-day-weather-forecast-app#readme",
+  "homepage": "https://github.com/RakibRahman/webpack-practice#readme",
   "dependencies": {
     "validator": "^13.6.0",
     "webpack": "^5.40.0",
