@@ -17,3 +17,8 @@ In `package.json`:
 - npx webpack //short for build script
 - npx webpack --watch //updates files on changes
 - npx webpack serve //short for start-dev script
+
+# loaders
+- npm install file-loader --save-dev     
+- npm install css-loader style-loader sass-loader --save-dev 
+- npm install babel-loader --save-dev
