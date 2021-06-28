@@ -1,25 +1,26 @@
 const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/js/app.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
+    publicPath: "",
   },
-  //watch: true, //not necessary if we use devServer
+
   devServer: {
     port: 8080,
-    contentBase: path.resolve(__dirname, "dist"),
-    hot: true, //hot module replacement
+    contentBase: path.resolve(__dirname, "./dist"),
+    index: "index.html",
+    writeToDisk: true,
   },
-  mode: "none",
-  // mode: "development",
-  //   mode: "production",
+
+  mode: "development",
+
   module: {
     rules: [
-      //image loader rules
       {
         test: /\.(jpg|png|svg)$/,
         use: [
@@ -32,7 +33,6 @@ module.exports = {
           },
         ],
       },
-      //css sass loader rules
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
@@ -41,23 +41,6 @@ module.exports = {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
-
-      /*
-       
-       
-        {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          "style-loader",
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader"
-        ]
-      }
-       */
-
-      //babel-loader
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -65,7 +48,28 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.hbs$/,
+        use: ["handlebars-loader"],
+      },
     ],
   },
-  plugins: [new TerserPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        "**/*",
+        path.join(process.cwd(), "build/**/*"),
+      ],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "index.html",
+      title: "Learn WebPack",
+      template: "./src/index.hbs",
+      meta: {
+        description: "Can you hear me?",
+      },
+    }),
+  ],
 };
